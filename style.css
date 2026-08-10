@@ -1,0 +1,474 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+    background: #f7f8fa;
+
+    color: #222;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar {
+    height: 70px;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 8%;
+
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    font-size: 22px;
+
+    font-weight: bold;
+
+    flex: 1;
+}
+
+.navbar nav {
+    display: flex;
+
+    gap: 30px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+
+    color: #555;
+
+    font-size: 15px;
+}
+
+.navbar nav a:hover {
+    color: #111;
+}
+
+.login-btn {
+    margin-left: 30px;
+
+    padding: 10px 20px;
+
+    background: #111;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    background: #111;
+
+    color: white;
+
+    padding: 90px 8%;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-label {
+    font-size: 13px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 20px;
+
+    color: #aaa;
+}
+
+.hero h1 {
+    font-size: 58px;
+
+    line-height: 1.05;
+
+    margin-bottom: 25px;
+}
+
+.hero-description {
+    color: #ccc;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    max-width: 550px;
+
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+
+    gap: 15px;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 14px 22px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.primary-btn {
+    border: none;
+
+    background: #dc3545;
+
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #bb2d3b;
+}
+
+.secondary-btn {
+    background: #198754;
+
+    border: none;
+
+    color: white;
+}
+
+.secondary-btn:hover {
+    background: #157347;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-section {
+    padding: 50px 8% 20px;
+}
+
+.search-section h2 {
+    margin-bottom: 20px;
+}
+
+.search-box {
+    display: flex;
+
+    max-width: 700px;
+}
+
+.search-box input {
+    flex: 1;
+
+    padding: 15px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px 0 0 8px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+.search-box input:focus {
+    border-color: #999;
+}
+
+.search-box button {
+    padding: 0 25px;
+
+    border: none;
+
+    background: #111;
+
+    color: white;
+
+    border-radius: 0 8px 8px 0;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   ITEMS SECTION
+========================= */
+
+.items-section {
+    padding: 40px 8% 70px;
+}
+
+.section-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.section-header p {
+    color: #777;
+
+    margin-top: 8px;
+}
+
+.view-btn {
+    padding: 10px 18px;
+
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   ITEM GRID
+========================= */
+
+.items-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* =========================
+   ITEM CARD
+========================= */
+
+.item-card {
+    padding: 25px;
+
+    border-radius: 12px;
+
+    transition: 0.2s;
+}
+
+.item-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.10);
+}
+
+
+/* LOST CARD */
+
+.lost-card {
+    background: #fff1f1;
+
+    border: 1px solid #f5c2c2;
+}
+
+
+/* FOUND CARD */
+
+.found-card {
+    background: #effaf2;
+
+    border: 1px solid #bfe3c7;
+}
+
+
+/* =========================
+   ITEM HEADER
+========================= */
+
+.item-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+/* STATUS */
+
+.item-type {
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+/* LOST STATUS */
+
+.item-type.lost {
+    background: #dc3545;
+
+    color: white;
+}
+
+
+/* FOUND STATUS */
+
+.item-type.found {
+    background: #198754;
+
+    color: white;
+}
+
+
+.item-date {
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   ITEM CONTENT
+========================= */
+
+.item-icon {
+    font-size: 45px;
+
+    margin-bottom: 15px;
+}
+
+.item-card h3 {
+    font-size: 21px;
+
+    margin-bottom: 8px;
+}
+
+.category {
+    color: #666;
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+}
+
+.location {
+    color: #555;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   DETAILS BUTTON
+========================= */
+
+.details-btn {
+    width: 100%;
+
+    padding: 11px;
+
+    background: #111;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.details-btn:hover {
+    background: #333;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: white;
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #777;
+
+    border-top: 1px solid #eee;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .items-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 60px 5%;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .search-section,
+    .items-section {
+        padding-left: 5%;
+
+        padding-right: 5%;
+    }
+
+    .items-grid {
+        grid-template-columns: 1fr;
+    }
+}

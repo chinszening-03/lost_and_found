@@ -2,15 +2,27 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Lost & Found</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
 
 <header class="navbar">
 
@@ -19,9 +31,25 @@
     </div>
 
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Browse</a>
-        <a href="#">Report Item</a>
+
+        <a href="#">
+            Home
+        </a>
+
+        <a href="#recent-items">
+            Browse
+        </a>
+
+        <a href="#"
+           onclick="openLostModal(); return false;">
+            Report Lost
+        </a>
+
+        <a href="#"
+           onclick="openFoundModal(); return false;">
+            Report Found
+        </a>
+
     </nav>
 
     <button class="login-btn">
@@ -31,7 +59,9 @@
 </header>
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -53,11 +83,17 @@
 
         <div class="hero-buttons">
 
-            <button class="primary-btn">
+            <button
+                class="primary-btn"
+                onclick="openLostModal()"
+            >
                 Report Lost Item
             </button>
 
-            <button class="secondary-btn">
+            <button
+                class="secondary-btn"
+                onclick="openFoundModal()"
+            >
                 Report Found Item
             </button>
 
@@ -68,7 +104,9 @@
 </section>
 
 
-<!-- SEARCH -->
+<!-- =========================
+     SEARCH
+========================= -->
 
 <section class="search-section">
 
@@ -93,9 +131,14 @@
 </section>
 
 
-<!-- RECENT ITEMS -->
+<!-- =========================
+     RECENT ITEMS
+========================= -->
 
-<section class="items-section">
+<section
+    class="items-section"
+    id="recent-items"
+>
 
     <div class="section-header">
 
@@ -241,6 +284,382 @@
     </div>
 
 </section>
+
+
+<!-- =========================
+     LOST ITEM MODAL
+========================= -->
+
+<div
+    id="lostModal"
+    class="modal"
+>
+
+    <div class="modal-content lost-modal">
+
+        <button
+            class="close-btn"
+            onclick="closeLostModal()"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-header">
+
+            <span class="modal-icon">
+                🔴
+            </span>
+
+            <div>
+
+                <p class="modal-label lost-label">
+                    LOST ITEM
+                </p>
+
+                <h2>
+                    Report a Lost Item
+                </h2>
+
+                <p>
+                    Tell us about the item you lost.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="lostItemForm">
+
+
+            <div class="form-group">
+
+                <label>
+                    Item Name
+                </label>
+
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="e.g. iPhone 15"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Category
+                </label>
+
+                <select
+                    name="category"
+                    required
+                >
+
+                    <option value="">
+                        Select a category
+                    </option>
+
+                    <option>
+                        Electronics
+                    </option>
+
+                    <option>
+                        Bags
+                    </option>
+
+                    <option>
+                        Wallet
+                    </option>
+
+                    <option>
+                        Keys
+                    </option>
+
+                    <option>
+                        Documents
+                    </option>
+
+                    <option>
+                        Clothing
+                    </option>
+
+                    <option>
+                        Others
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    name="description"
+                    rows="4"
+                    placeholder="Describe the item..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Location Lost
+                </label>
+
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="e.g. Mid Valley"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Date Lost
+                </label>
+
+                <input
+                    type="date"
+                    name="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Contact Email
+                </label>
+
+                <input
+                    type="email"
+                    name="contactEmail"
+                    placeholder="example@email.com"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn lost-submit"
+            >
+                Report Lost Item
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     FOUND ITEM MODAL
+========================= -->
+
+<div
+    id="foundModal"
+    class="modal"
+>
+
+    <div class="modal-content found-modal">
+
+        <button
+            class="close-btn"
+            onclick="closeFoundModal()"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-header">
+
+            <span class="modal-icon">
+                🟢
+            </span>
+
+            <div>
+
+                <p class="modal-label found-label">
+                    FOUND ITEM
+                </p>
+
+                <h2>
+                    Report a Found Item
+                </h2>
+
+                <p>
+                    Help someone find their belongings.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="foundItemForm">
+
+
+            <div class="form-group">
+
+                <label>
+                    Item Name
+                </label>
+
+                <input
+                    type="text"
+                    name="title"
+                    placeholder="e.g. Black Backpack"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Category
+                </label>
+
+                <select
+                    name="category"
+                    required
+                >
+
+                    <option value="">
+                        Select a category
+                    </option>
+
+                    <option>
+                        Electronics
+                    </option>
+
+                    <option>
+                        Bags
+                    </option>
+
+                    <option>
+                        Wallet
+                    </option>
+
+                    <option>
+                        Keys
+                    </option>
+
+                    <option>
+                        Documents
+                    </option>
+
+                    <option>
+                        Clothing
+                    </option>
+
+                    <option>
+                        Others
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    name="description"
+                    rows="4"
+                    placeholder="Describe the item..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Location Found
+                </label>
+
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="e.g. Taman Connaught"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Date Found
+                </label>
+
+                <input
+                    type="date"
+                    name="date"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Contact Email
+                </label>
+
+                <input
+                    type="email"
+                    name="contactEmail"
+                    placeholder="example@email.com"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn found-submit"
+            >
+                Report Found Item
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
 
 
 <!-- FOOTER -->

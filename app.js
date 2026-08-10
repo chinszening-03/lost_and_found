@@ -1,5 +1,67 @@
 console.log("Lost & Found application loaded");
 
+//lost modal
+function openLostModal() {
+
+    const modal =
+        document.getElementById("lostModal");
+
+    modal.classList.add("active");
+}
+
+
+function closeLostModal() {
+
+    const modal =
+        document.getElementById("lostModal");
+
+    modal.classList.remove("active");
+}
+
+
+//found modal
+function openFoundModal() {
+
+    const modal =
+        document.getElementById("foundModal");
+
+    modal.classList.add("active");
+}
+
+
+function closeFoundModal() {
+
+    const modal =
+        document.getElementById("foundModal");
+
+    modal.classList.remove("active");
+}
+
+
+//close when click outside
+window.addEventListener("click", function (event) {
+
+    const lostModal =
+        document.getElementById("lostModal");
+
+    const foundModal =
+        document.getElementById("foundModal");
+
+
+    if (event.target === lostModal) {
+
+        closeLostModal();
+
+    }
+
+
+    if (event.target === foundModal) {
+
+        closeFoundModal();
+
+    }
+
+});
 
 //search
 const searchButton =
@@ -28,47 +90,61 @@ searchButton.addEventListener("click", function () {
 });
 
 
-//report lost item
-const reportLostButton =
-    document.querySelector(".primary-btn");
+//report lost form
+const lostForm =
+    document.getElementById("lostItemForm");
 
 
-reportLostButton.addEventListener("click", function () {
+if (lostForm) {
 
-    alert(
-        "Report Lost Item page will be added next."
+    lostForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            alert(
+                "Lost item submitted! Backend connection will be added next."
+            );
+
+
+            lostForm.reset();
+
+            closeLostModal();
+
+        }
     );
 
-});
+}
+
 
 
 //report found item
-const reportFoundButton =
-    document.querySelector(".secondary-btn");
+const foundForm =
+    document.getElementById("foundItemForm");
 
 
-reportFoundButton.addEventListener("click", function () {
+if (foundForm) {
 
-    alert(
-        "Report Found Item page will be added next."
+    foundForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            alert(
+                "Found item submitted! Backend connection will be added next."
+            );
+
+
+            foundForm.reset();
+
+            closeFoundModal();
+
+        }
     );
-
-});
-
-
-//details
-const detailButtons =
-    document.querySelectorAll(".details-btn");
+}
 
 
-detailButtons.forEach(function (button) {
-
-    button.addEventListener("click", function () {
-
-        alert(
-            "Item details page will be added next."
-        );
-
-    });
-
-});

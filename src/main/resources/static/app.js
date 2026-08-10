@@ -91,60 +91,109 @@ searchButton.addEventListener("click", function () {
 
 
 //report lost form
-const lostForm =
-    document.getElementById("lostItemForm");
-
+const lostForm = document.getElementById("lostItemForm");
 
 if (lostForm) {
+    lostForm.addEventListener("submit", async function (event) {
 
-    lostForm.addEventListener(
-        "submit",
-        function (event) {
+        event.preventDefault();
 
-            event.preventDefault();
+        const formData = new FormData(lostForm);
 
+        const item = {
+            type: "LOST",
+            title: formData.get("title"),
+            category: formData.get("category"),
+            description: formData.get("description"),
+            location: formData.get("location"),
+            date: formData.get("date"),
+            contactEmail: formData.get("contactEmail")
+        };
 
-            alert(
-                "Lost item submitted! Backend connection will be added next."
-            );
+        try {
 
+            const response = await fetch("/api/items", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(item)
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to submit lost item");
+            }
+
+            const savedItem = await response.json();
+
+            console.log("Lost item saved:", savedItem);
+
+            alert("Lost item submitted successfully!");
 
             lostForm.reset();
-
             closeLostModal();
 
-        }
-    );
+        } catch (error) {
 
+            console.error("Error:", error);
+
+            alert("Unable to submit lost item.");
+
+        }
+    });
 }
 
 
 
 //report found item
-const foundForm =
-    document.getElementById("foundItemForm");
-
+const foundForm = document.getElementById("foundItemForm");
 
 if (foundForm) {
+    foundForm.addEventListener("submit", async function (event) {
 
-    foundForm.addEventListener(
-        "submit",
-        function (event) {
+        event.preventDefault();
 
-            event.preventDefault();
+        const formData = new FormData(foundForm);
 
+        const item = {
+            type: "FOUND",
+            title: formData.get("title"),
+            category: formData.get("category"),
+            description: formData.get("description"),
+            location: formData.get("location"),
+            date: formData.get("date"),
+            contactEmail: formData.get("contactEmail")
+        };
 
-            alert(
-                "Found item submitted! Backend connection will be added next."
-            );
+        try {
 
+            const response = await fetch("/api/items", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(item)
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to submit found item");
+            }
+
+            const savedItem = await response.json();
+
+            console.log("Found item saved:", savedItem);
+
+            alert("Found item submitted successfully!");
 
             foundForm.reset();
-
             closeFoundModal();
 
+        } catch (error) {
+
+            console.error("Error:", error);
+
+            alert("Unable to submit found item.");
+
         }
-    );
+    });
 }
-
-

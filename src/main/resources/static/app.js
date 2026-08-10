@@ -128,6 +128,8 @@ if (lostForm) {
 
             console.log("Lost item saved:", savedItem);
 
+            addItemToPage(savedItem);
+
             alert("Lost item submitted successfully!");
 
             lostForm.reset();
@@ -183,6 +185,8 @@ if (foundForm) {
 
             console.log("Found item saved:", savedItem);
 
+            addItemToPage(savedItem);
+
             alert("Found item submitted successfully!");
 
             foundForm.reset();
@@ -197,3 +201,141 @@ if (foundForm) {
         }
     });
 }
+
+// Load items from backend
+async function loadItems() {
+
+    try {
+
+        const response = await fetch("/api/items");
+
+        if (!response.ok) {
+            throw new Error("Failed to load items");
+        }
+
+        const items = await response.json();
+
+        console.log("Items from database:", items);
+
+        displayItems(items);
+
+    } catch (error) {
+
+        console.error("Error loading items:", error);
+
+    }
+}
+
+function displayItems(items) {
+
+    const itemsGrid = document.querySelector(".items-grid");
+
+    if (!itemsGrid) {
+        return;
+    }
+
+    itemsGrid.innerHTML = "";
+
+    items.forEach(function (item) {
+
+        const card = document.createElement("div");
+
+        card.classList.add("item-card");
+
+        if (item.type === "LOST") {
+            card.classList.add("lost-card");
+        } else {
+            card.classList.add("found-card");
+        }
+
+        card.innerHTML = `
+            <div class="item-top">
+
+                <span class="item-type ${item.type.toLowerCase()}">
+                    ${item.type}
+                </span>
+
+                <span class="item-date">
+                    ${item.date || ""}
+                </span>
+
+            </div>
+
+            <div class="item-icon">
+                ${item.type === "LOST" ? "🔍" : "✓"}
+            </div>
+
+            <h3>${item.title}</h3>
+
+            <p class="category">
+                ${item.category || ""}
+            </p>
+
+            <p class="location">
+                📍 ${item.location || ""}
+            </p>
+
+            <button class="details-btn">
+                View Details
+            </button>
+        `;
+
+        itemsGrid.appendChild(card);
+    });
+}
+
+function addItemToPage(item) {
+
+    const itemsGrid = document.querySelector(".items-grid");
+
+    if (!itemsGrid) {
+        return;
+    }
+
+    const card = document.createElement("div");
+
+    card.classList.add("item-card");
+
+    if (item.type === "LOST") {
+        card.classList.add("lost-card");
+    } else {
+        card.classList.add("found-card");
+    }
+
+    card.innerHTML = `
+        <div class="item-top">
+
+            <span class="item-type ${item.type.toLowerCase()}">
+                ${item.type}
+            </span>
+
+            <span class="item-date">
+                ${item.date || ""}
+            </span>
+
+        </div>
+
+        <div class="item-icon">
+            ${item.type === "LOST" ? "🔍" : "✓"}
+        </div>
+
+        <h3>${item.title}</h3>
+
+        <p class="category">
+            ${item.category || ""}
+        </p>
+
+        <p class="location">
+            📍 ${item.location || ""}
+        </p>
+
+        <button class="details-btn">
+            View Details
+        </button>
+    `;
+
+    // Add the new card to the page immediately
+    itemsGrid.prepend(card);
+}
+
+loadItems();

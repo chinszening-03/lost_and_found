@@ -78,7 +78,134 @@ const searchButton =
 const searchInput =
     document.getElementById("searchInput");
 
+if (searchButton && searchInput) {
 
+    searchButton.addEventListener(
+        "click",
+        searchItems
+    );
+
+
+    // Allow pressing Enter to search
+
+    searchInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Enter") {
+
+                searchItems();
+
+            }
+
+        }
+    );
+
+}
+
+
+async function searchItems() {
+
+    const keyword =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    // If search is empty, show everything again
+
+    if (keyword === "") {
+
+        loadItems();
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch("/api/items");
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to search items"
+            );
+
+        }
+
+
+        const items =
+            await response.json();
+
+
+        // Search by title, category,
+        // location, description and type
+
+        const filteredItems =
+            items.filter(function (item) {
+
+                return (
+
+                    (item.title || "")
+                        .toLowerCase()
+                        .includes(keyword)
+
+                    ||
+
+                    (item.category || "")
+                        .toLowerCase()
+                        .includes(keyword)
+
+                    ||
+
+                    (item.location || "")
+                        .toLowerCase()
+                        .includes(keyword)
+
+                    ||
+
+                    (item.description || "")
+                        .toLowerCase()
+                        .includes(keyword)
+
+                    ||
+
+                    (item.type || "")
+                        .toLowerCase()
+                        .includes(keyword)
+
+                );
+
+            });
+
+
+        displayItems(filteredItems);
+
+
+        console.log(
+            "Search results:",
+            filteredItems
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Search error:",
+            error
+        );
+
+        alert(
+            "Unable to search items."
+        );
+
+    }
+
+}
 
 //report lost form
 const lostForm = document.getElementById("lostItemForm");

@@ -1,5 +1,115 @@
 console.log("Lost & Found application loaded");
 
+//report lost form
+const lostForm = document.getElementById("lostItemForm");
+
+if (lostForm) {
+    lostForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const formData = new FormData(lostForm);
+
+        const item = {
+            type: "LOST",
+            title: formData.get("title"),
+            category: formData.get("category"),
+            description: formData.get("description"),
+            location: formData.get("location"),
+            date: formData.get("date"),
+            contactEmail: formData.get("contactEmail")
+        };
+
+        try {
+
+            const response = await fetch("/api/items", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(item)
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to submit lost item");
+            }
+
+            const savedItem = await response.json();
+
+            console.log("Lost item saved:", savedItem);
+
+            addItemToPage(savedItem);
+
+            alert("Lost item submitted successfully!");
+
+            lostForm.reset();
+            closeLostModal();
+
+        } catch (error) {
+
+            console.error("Error:", error);
+
+            alert("Unable to submit lost item.");
+
+        }
+    });
+}
+
+//report found item
+const foundForm = document.getElementById("foundItemForm");
+
+if (foundForm) {
+    foundForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const formData = new FormData(foundForm);
+
+        const item = {
+            type: "FOUND",
+            title: formData.get("title"),
+            category: formData.get("category"),
+            description: formData.get("description"),
+            location: formData.get("location"),
+            date: formData.get("date"),
+            contactEmail: formData.get("contactEmail")
+        };
+
+        try {
+
+            const response = await fetch("/api/items", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(item)
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to submit found item");
+            }
+
+            const savedItem = await response.json();
+
+            console.log("Found item saved:", savedItem);
+
+            addItemToPage(savedItem);
+
+            alert("Found item submitted successfully!");
+
+            foundForm.reset();
+            closeFoundModal();
+
+        } catch (error) {
+
+            console.error("Error:", error);
+
+            alert("Unable to submit found item.");
+
+        }
+    });
+}
+
 //lost modal
 function openLostModal() {
 
@@ -103,7 +213,6 @@ if (searchButton && searchInput) {
 
 }
 
-
 async function searchItems() {
 
     const keyword =
@@ -205,118 +314,6 @@ async function searchItems() {
 
     }
 
-}
-
-//report lost form
-const lostForm = document.getElementById("lostItemForm");
-
-if (lostForm) {
-    lostForm.addEventListener("submit", async function (event) {
-
-        event.preventDefault();
-
-        const formData = new FormData(lostForm);
-
-        const item = {
-            type: "LOST",
-            title: formData.get("title"),
-            category: formData.get("category"),
-            description: formData.get("description"),
-            location: formData.get("location"),
-            date: formData.get("date"),
-            contactEmail: formData.get("contactEmail")
-        };
-
-        try {
-
-            const response = await fetch("/api/items", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(item)
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to submit lost item");
-            }
-
-            const savedItem = await response.json();
-
-            console.log("Lost item saved:", savedItem);
-
-            addItemToPage(savedItem);
-
-            alert("Lost item submitted successfully!");
-
-            lostForm.reset();
-            closeLostModal();
-
-        } catch (error) {
-
-            console.error("Error:", error);
-
-            alert("Unable to submit lost item.");
-
-        }
-    });
-}
-
-
-
-//report found item
-const foundForm = document.getElementById("foundItemForm");
-
-if (foundForm) {
-    foundForm.addEventListener("submit", async function (event) {
-
-        event.preventDefault();
-
-        const formData = new FormData(foundForm);
-
-        const item = {
-            type: "FOUND",
-            title: formData.get("title"),
-            category: formData.get("category"),
-            description: formData.get("description"),
-            location: formData.get("location"),
-            date: formData.get("date"),
-            contactEmail: formData.get("contactEmail")
-        };
-
-        try {
-
-            const response = await fetch("/api/items", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(item)
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to submit found item");
-            }
-
-            const savedItem = await response.json();
-
-            console.log("Found item saved:", savedItem);
-
-            addItemToPage(savedItem);
-
-            alert("Found item submitted successfully!");
-
-            foundForm.reset();
-            closeFoundModal();
-
-        } catch (error) {
-
-            console.error("Error:", error);
-
-            alert("Unable to submit found item.");
-
-        }
-    });
 }
 
 // Load items from backend
@@ -586,7 +583,6 @@ function openItemDetails(item) {
         "active"
     );;
 }
-
 
 function closeItemDetails() {
 

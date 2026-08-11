@@ -716,3 +716,38 @@ footer {
         min-height: 60px;
     }
 }
+
+/* =========================
+   ITEM DETAILS MODAL
+========================= */
+
+.details-modal {
+    max-width: 500px;
+    padding: 30px;
+}
+
+.details-body {
+    margin-top: 10px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.detail-row span {
+    color: #777;
+    flex-shrink: 0;
+}
+
+.detail-row strong {
+    color: #222;
+    text-align: right;
+    font-weight: 500;
+    max-width: 65%;
+    word-break: break-word;
+}

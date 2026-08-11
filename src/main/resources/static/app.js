@@ -47,12 +47,20 @@ window.addEventListener("click", function (event) {
     const foundModal =
         document.getElementById("foundModal");
 
+    const itemDetailsModal =
+    document.getElementById("itemDetailsModal");
+
+    if (event.target === itemDetailsModal) {
+
+        closeItemDetails();
+    }
 
     if (event.target === lostModal) {
 
         closeLostModal();
 
     }
+
 
 
     if (event.target === foundModal) {
@@ -70,24 +78,6 @@ const searchButton =
 const searchInput =
     document.getElementById("searchInput");
 
-
-searchButton.addEventListener("click", function () {
-
-    const keyword =
-        searchInput.value.trim();
-
-    if (keyword === "") {
-
-        alert("Please enter an item to search.");
-
-        return;
-    }
-
-    alert(
-        "Search functionality will be connected to the Java backend."
-    );
-
-});
 
 
 //report lost form
@@ -238,47 +228,7 @@ function displayItems(items) {
 
     items.forEach(function (item) {
 
-        const card = document.createElement("div");
-
-        card.classList.add("item-card");
-
-        if (item.type === "LOST") {
-            card.classList.add("lost-card");
-        } else {
-            card.classList.add("found-card");
-        }
-
-        card.innerHTML = `
-            <div class="item-top">
-
-                <span class="item-type ${item.type.toLowerCase()}">
-                    ${item.type}
-                </span>
-
-                <span class="item-date">
-                    ${item.date || ""}
-                </span>
-
-            </div>
-
-            <div class="item-icon">
-                ${item.type === "LOST" ? "🔍" : "✓"}
-            </div>
-
-            <h3>${item.title}</h3>
-
-            <p class="category">
-                ${item.category || ""}
-            </p>
-
-            <p class="location">
-                📍 ${item.location || ""}
-            </p>
-
-            <button class="details-btn">
-                View Details
-            </button>
-        `;
+        const card = createItemCard(item);
 
         itemsGrid.appendChild(card);
     });
@@ -291,6 +241,13 @@ function addItemToPage(item) {
     if (!itemsGrid) {
         return;
     }
+
+    const card = createItemCard(item);
+
+    itemsGrid.prepend(card);
+}
+
+function createItemCard(item) {
 
     const card = document.createElement("div");
 
@@ -334,8 +291,181 @@ function addItemToPage(item) {
         </button>
     `;
 
-    // Add the new card to the page immediately
-    itemsGrid.prepend(card);
+    // Connect View Details button
+    const detailsButton = card.querySelector(".details-btn");
+
+    detailsButton.addEventListener("click", function () {
+        openItemDetails(item);
+    });
+
+    return card;
+}
+
+function openItemDetails(item) {
+
+    const modal =
+        document.getElementById(
+            "itemDetailsModal"
+        );
+
+
+    const modalContent =
+        modal.querySelector(
+            ".modal-content"
+        );
+
+
+    // Title
+
+    document.getElementById(
+        "detailsTitle"
+    ).textContent =
+        item.title || "Unknown Item";
+
+
+    // Category
+
+    document.getElementById(
+        "detailsCategory"
+    ).textContent =
+        item.category || "Not provided";
+
+
+    // Location
+
+    document.getElementById(
+        "detailsLocation"
+    ).textContent =
+        item.location || "Not provided";
+
+
+    // Date
+
+    document.getElementById(
+        "detailsItemDate"
+    ).textContent =
+        item.date || "Not provided";
+
+
+    // Description
+
+    document.getElementById(
+        "detailsDescription"
+    ).textContent =
+        item.description ||
+        "No description provided";
+
+
+    // Contact
+
+    document.getElementById(
+        "detailsContact"
+    ).textContent =
+        item.contactEmail ||
+        "Not provided";
+
+
+    // Status
+
+    document.getElementById(
+        "detailsStatus"
+    ).textContent =
+        item.status || "OPEN";
+
+
+    // Header date
+
+    document.getElementById(
+        "detailsDate"
+    ).textContent =
+        item.date || "";
+
+
+    const label =
+        document.getElementById(
+            "detailsLabel"
+        );
+
+
+    const icon =
+        document.getElementById(
+            "detailsIcon"
+        );
+
+
+    // =========================
+    // LOST
+    // =========================
+
+    if (item.type === "LOST") {
+
+        label.textContent =
+            "LOST ITEM";
+
+
+        label.className =
+            "modal-label lost-label";
+
+
+        icon.textContent =
+            "🔍";
+
+
+        modalContent.classList.remove(
+            "found-modal"
+        );
+
+
+        modalContent.classList.add(
+            "lost-modal"
+        );
+
+    }
+
+
+    // =========================
+    // FOUND
+    // =========================
+
+    else {
+
+        label.textContent =
+            "FOUND ITEM";
+
+
+        label.className =
+            "modal-label found-label";
+
+
+        icon.textContent =
+            "✓";
+
+
+        modalContent.classList.remove(
+            "lost-modal"
+        );
+
+
+        modalContent.classList.add(
+            "found-modal"
+        );
+
+    }
+
+
+    // Open modal
+
+    modal.classList.add(
+        "active"
+    );;
+}
+
+
+function closeItemDetails() {
+
+    const modal = document.getElementById("itemDetailsModal");
+
+    modal.classList.remove("active");
 }
 
 loadItems();

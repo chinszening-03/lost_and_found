@@ -154,9 +154,6 @@
 
         </div>
 
-        <button class="view-btn">
-            View All
-        </button>
 
     </div>
 
@@ -675,6 +672,79 @@
 
 <script src="app.js"></script>
 
+<!-- ITEM DETAILS MODAL -->
+
+<div id="itemDetailsModal" class="modal">
+
+    <div class="modal-content details-modal">
+
+        <button
+            class="close-btn"
+            onclick="closeItemDetails()">
+            &times;
+        </button>
+
+        <div class="modal-header">
+
+            <div id="detailsIcon" class="modal-icon">
+                🔍
+            </div>
+
+            <div>
+
+                <p id="detailsLabel" class="modal-label lost-label">
+                    LOST ITEM
+                </p>
+
+                <h2 id="detailsTitle">
+                    Item Details
+                </h2>
+
+                <p id="detailsDate">
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="details-body">
+
+            <div class="detail-row">
+                <span>Category</span>
+                <strong id="detailsCategory"></strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Location</span>
+                <strong id="detailsLocation"></strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Date</span>
+                <strong id="detailsItemDate"></strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Description</span>
+                <strong id="detailsDescription"></strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Contact</span>
+                <strong id="detailsContact"></strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Status</span>
+                <strong id="detailsStatus"></strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 </body>
 
 </html>
